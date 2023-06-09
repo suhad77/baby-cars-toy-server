@@ -49,12 +49,14 @@ async function run() {
             }
 
 
-            // const page = parseInt(data.page) || 0;
-            // const limit = parseInt(data.limit) || 20;
-            // const skip = page * limit;
+            const page = parseInt(data.page) || 0;
+            const limit = parseInt(data.limit) || 20;
+            const skip = page * limit;
 
             const result = await toysCollection
                 .find(query)
+                .limit(limit)
+                .skip(skip)
                 .toArray();
             res.send(result);
         });
