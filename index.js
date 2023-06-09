@@ -9,7 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.v43qfla.mongodb.net/?retryWrites=true&w=majority`;
-console.log(uri);
+
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -46,7 +46,7 @@ async function run() {
           }
 
           if (search) {
-              query = { title: { $regex: search, $options: 'i' } }
+              query = { name: { $regex: search, $options: 'i' } }
           }
 
 
@@ -70,13 +70,14 @@ async function run() {
 
 
       app.get('/myToys', async (req, res) => {
-          const email = req.query?.email;
+          const Email = req.query?.Email;
           const sortData = req.query.sort;
+          console.log(Email)
 
           let query = {}
 
-          if (email) {
-              query = { email: email }
+          if (Email) {
+              query = { Email: Email }
           }
 
           let sortQuery = {}
@@ -111,13 +112,13 @@ async function run() {
 
           const updatedToy = {
               $set: {
-                  title: toy?.title,
+                  name: toy?.name,
                   photoUrl: toy?.photoUrl,
                   description: toy?.description,
                   price: toy?.price,
                   quantity: toy?.quantity,
                   rating: toy?.rating,
-                  sub_category: toy?.sub_category,
+                  Category: toy?.Category,
               }
           }
 
