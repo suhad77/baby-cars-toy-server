@@ -48,11 +48,6 @@ async function run() {
                 query = { name: { $regex: search, $options: 'i' } }
             }
 
-
-            // const page = parseInt(data.page) || 0;
-            // const limit = parseInt(data.limit) || 20;
-            // const skip = page * limit;
-
             const result = await toysCollection
                 .find(query)
                 .toArray();
